@@ -1,0 +1,144 @@
+<!doctype html>
+<html ng-app="myApp">
+	<head>
+		<title>iGCDP Rank</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+		<script src="igcdp_rank.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/main.css">
+	</head>
+
+	<body ng-controller="Analytics">
+		<!--SPINNER-->
+    	<div id="preloader">
+	        <div id="status">
+	            <div class="preloader-wrapper big active">
+	                <div class="spinner-layer spinner-blue">
+	                    <div class="circle-clipper left">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="gap-patch">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="circle-clipper right">
+	                        <div class="circle"></div>
+	                    </div>
+	                </div>
+
+	                <div class="spinner-layer spinner-red">
+	                    <div class="circle-clipper left">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="gap-patch">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="circle-clipper right">
+	                        <div class="circle"></div>
+	                    </div>
+	                </div>
+
+	                <div class="spinner-layer spinner-yellow">
+	                    <div class="circle-clipper left">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="gap-patch">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="circle-clipper right">
+	                        <div class="circle"></div>
+	                    </div>
+	                </div>
+
+	                <div class="spinner-layer spinner-green">
+	                    <div class="circle-clipper left">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="gap-patch">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="circle-clipper right">
+	                        <div class="circle"></div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    	<!--SPINNER-->
+
+		<section class="container-fluid">
+			<section class="row">
+				<article id="container" class="col-sm-12 col-md-12 col-lg-12"  style="min-height: 800px">
+				</article>
+			</section>
+			
+			<section class="container">
+				<form class="row">
+					<div class="input-field col s6 m3 l3">
+						<input placeholder="Fecha de Inicio" type="date" class="datepicker-in" name="fecha_in" id="fecha_in">
+					</div>
+					<div class="input-field col s6 m3 l3">
+						<input placeholder="Fecha de Fin" type="date" class="datepicker-out" name="fecha_out" id="fecha_out">
+					</div>
+					<div class="input-field col s12 m4 l4">
+	          			<input id="access_token" ng-model="access_token" name="access_token" type="password" class="validate">
+	          			<label for="access_token">Token</label>
+	        		</div>
+	        		<div class="input-field col s12 m2 l2">
+	        			<button ng-click='go()' class="btn waves-effect waves-light" type="submit" name="action">Go</button>	        			
+	        		</div>				
+				</form>
+			</section>
+
+			<div class="row">				
+				<div class="input-field col s12 m5 l5">						
+					<input type="text" value="" id="search" ng-model="search" />					
+	          		<label for="search">Search</label>
+				</div>
+				<table class="striped">
+					<thead>
+						<tr>
+							<th class="center-align">#</th>
+							<th>Name</th>
+							<th>RE</th>
+							<th>MA</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="mc in mcs20 | filter : search">
+							<td class="center-align">{{$index + 1}}</td>
+							<td>{{mc.name}}</td>
+							<td>{{mc.apps}}</td>
+							<td>{{mc.appro}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+		<script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE=" crossorigin="anonymous"></script>
+		  <!-- Compiled and minified JavaScript -->
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  		<script>
+	    $(document).ready(function() {
+			$('.datepicker-in').pickadate({
+				formatSubmit: 'yyyy-mm-dd',
+    			selectMonths: true, // Creates a dropdown to control month
+    			selectYears: 15 // Creates a dropdown of 15 years to control year
+  			});
+  			$('.datepicker-out').pickadate({
+  				formatSubmit: 'yyyy/mm/dd',
+    			selectMonths: true, // Creates a dropdown to control month
+    			selectYears: 15 // Creates a dropdown of 15 years to control year
+  			});
+	        $('#status').fadeOut(); // will first fade out the loading animation
+			$('#preloader').delay(300).fadeOut('slow'); // will fade out the white DIV that covers the website.
+			$('body').delay(300).css({'overflow':'visible'});
+	    });
+  		</script>
+    	<!--SCRIPTS GRAPH-->
+    	<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/data.js"></script>
+		<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+	</body>
+</html>

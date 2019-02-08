@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html ng-app="applicants_icx">
+<head>
+	<title>People - Applicants</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body ng-controller="Analytics">
+		<!--SPINNER-->
+    	<div id="preloader">
+	        <div id="status">
+	            <div class="preloader-wrapper big active">
+	                <div class="spinner-layer spinner-blue">
+	                    <div class="circle-clipper left">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="gap-patch">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="circle-clipper right">
+	                        <div class="circle"></div>
+	                    </div>
+	                </div>
+
+	                <div class="spinner-layer spinner-red">
+	                    <div class="circle-clipper left">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="gap-patch">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="circle-clipper right">
+	                        <div class="circle"></div>
+	                    </div>
+	                </div>
+
+	                <div class="spinner-layer spinner-yellow">
+	                    <div class="circle-clipper left">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="gap-patch">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="circle-clipper right">
+	                        <div class="circle"></div>
+	                    </div>
+	                </div>
+
+	                <div class="spinner-layer spinner-green">
+	                    <div class="circle-clipper left">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="gap-patch">
+	                        <div class="circle"></div>
+	                    </div>
+	                    <div class="circle-clipper right">
+	                        <div class="circle"></div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    	<!--SPINNER-->
+	<main>
+		<section class="container">
+			<form class="row">
+				<div class="input-field col s6 m2 l2">
+					<input placeholder="Fecha de Inicio" type="date" class="datepicker-in" name="fecha_in" id="fecha_in">
+				</div>
+				<div class="input-field col s6 m2 l2">
+					<input placeholder="Fecha de Fin" type="date" class="datepicker-out" name="fecha_out" id="fecha_out">
+				</div>
+				<div class="input-field col s12 m3 l3">
+          			<input id="access_token" ng-model="access_token" name="access_token" type="password" class="validate">
+          			<label for="access_token">Token</label>
+        		</div>        		
+        		<div class="input-field col s12 m2 l2">
+        			<select name="programa" id="programa">
+      					<option value="" disabled selected>Programa</option>
+      					<option value="1">oGV</option>
+      					<option value="2">oGT</option>
+					<option value="3">oGE</option>
+    				</select>
+        		</div>
+        		<div class="input-field col s12 m2 l2">
+        			<button ng-click='go()' class="btn waves-effect waves-light" type="submit" name="action">analyze</button>	        			
+        		</div>
+			</form>
+		</section>
+
+		<section class="fluid-container">			
+			<article class="row">
+				<div class="col-md-12">
+					<!--<table class="table table-stripped">-->
+					<table class="striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Nombre</th>
+								<th>Apellido</th>
+								<th>Email</th>
+								<th>OPP ID</th>
+								<th>OPP Nombres</th>
+								<th>Host LC</th>
+								<th>Home LC</th>
+								<th>País</th>
+								<th>Perfil</th>
+								<!--<th>Home LC</th>-->
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="p in people">
+								<th>{{$index + 1}}</th>
+								<th>{{p.name}}</th>
+								<th>{{p.last_name}}</th>
+								<th>{{p.email}}</th>
+								<th><a href="https://experience.aiesec.org/#/opportunities/{{p.tn_id}}" target="_blank">{{p.tn_id}}</a></th>
+								<th>{{p.tn_name}}</th>
+								<th>{{p.host_lc}}</th>
+								<th>{{p.lc}}</th>
+								<th>{{p.country}}</th>
+								<th><a href="{{p.expa_link}}" target="_blank">person</a></th>
+								<!--<th>{{p.email}}</th>-->
+								<!--<th>{{p.home_lc}}</th>-->
+								<th>{{p.status}}</th>
+								<!--<th><a href="{{p.expa_link}}" target="_blank">perfil</a></th>-->
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</article>
+		</section>
+	</main>
+
+	<!-- SCRIPTS -->
+	<script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE=" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+	<script type="text/javascript" src="js/applicants_law.js"></script>
+	<!-- Compiled and minified JavaScript -->
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  		<script>
+	    $(document).ready(function() {
+			$('.datepicker-in').pickadate({
+				format: 'yyyy-mm-dd',
+				formatSubmit: 'yyyy-mm-dd',
+    			selectMonths: true, // Creates a dropdown to control month
+    			selectYears: 15, // Creates a dropdown of 15 years to control year
+    			max: true
+  			});
+  			$('.datepicker-out').pickadate({
+  				format: 'yyyy-mm-dd',
+  				formatSubmit: 'yyyy-mm-dd',
+    			selectMonths: true, // Creates a dropdown to control month
+    			selectYears: 15, // Creates a dropdown of 15 years to control year
+    			max: true
+  			});
+	        $('#status').fadeOut(); // will first fade out the loading animation
+			$('#preloader').delay(300).fadeOut('slow'); // will fade out the white DIV that covers the website.
+			$('body').delay(300).css({'overflow':'visible'});
+
+			$('select').material_select();
+  			
+	    });
+  		</script>
+</body>
+</html>

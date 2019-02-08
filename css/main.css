@@ -1,0 +1,23 @@
+/*Spinner*/
+
+body {
+  overflow: hidden;
+}
+
+#preloader {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color:#26a69a; /* change if the mask should be a color other than white */
+  z-index:99; /* makes sure it stays on top */
+}
+
+#status {
+  position:absolute;
+  left:50%; /* centers the loading animation horizontally on the screen */
+  top:50%; /* centers the loading animation vertically on the screen */
+}
+
+/*Fin Spinner*/
